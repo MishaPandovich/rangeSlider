@@ -1,0 +1,38 @@
+.line {
+	position: relative;
+  display: inline-block;
+  width: 260px;
+  height: 3px;
+  background: #eee;
+}
+
+.thumb-one,
+.thumb-two {
+  position: absolute;
+  top: -4px;
+
+  width: 10px;
+  height: 10px;
+  border-radius: 20px;
+  background: gray;
+
+  cursor: pointer;
+}
+
+.thumb-one {
+  left:20px;
+}
+
+.thumb-two {
+  left: 40px;
+}
+
+.range-line {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 240px;
+  height: 3px;
+
+  background-color: #6e58d9;
+}
