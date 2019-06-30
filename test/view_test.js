@@ -18,7 +18,7 @@ afterEach(() => {
   parentElement.innerHTML = ''
 })
 
-describe('Тестирование DOM-элементов', () => {
+describe('Тестирование отрисовки DOM-элементов в html-документе', () => {
   it('создание стандартного слайдера (с одним бегунком)', () => {
     const view = new View(parentElement)
 
@@ -36,3 +36,4 @@ describe('Тестирование DOM-элементов', () => {
     expect(document.querySelectorAll('.line > .thumb-two').length).to.equal(1)
   })
 })
+

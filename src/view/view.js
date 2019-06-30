@@ -6,14 +6,18 @@ export default class View {
     this.thumbOne;
     this.thumbTwo;
 
-    this.initSlider(range);
+    this.initViewSlider(range);
   }
 
-  initSlider(range) {
+  initViewSlider(range) {
     this._createLine();
     this._createThumb(range);
 
     this.parentElem.appendChild(this.line);
+  }
+
+  changePositionThumb(thumb, left) {
+    thumb.style.left = left + 'px';
   }
 
   _createLine() {    
