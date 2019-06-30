@@ -1,5 +1,5 @@
 import './API.js';
 
 $(function() {
-	$('#slider').slider();
+  $('#slider').slider();
 });
