@@ -4,6 +4,7 @@
   width: 260px;
   height: 3px;
   background: #eee;
+  cursor: pointer;
 }
 
 .thumb-one,

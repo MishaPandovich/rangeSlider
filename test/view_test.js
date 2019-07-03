@@ -37,3 +37,22 @@ describe('Тестирование отрисовки DOM-элементов в 
   })
 })
 
+
+import Model from '../src/model/model.js'
+import Controller from '../src/controller/controller.js'
+
+// при положении слайдера на таком то расстоянии отоображение должно быть столько то
+
+//если позиция равна 32.5 то это 15
+
+/*describe('Тестирование контроллера', () => {
+  it('Нажатие линии', () => {
+    const model = new Model(0, 120, 15)
+    const view = new View(parentElement, false, 15)
+    const controller = new Controller();
+
+    document.querySelector('.line').click()
+
+    expect(controller.positionCursor).to.equal('hi')
+  })
+});*/

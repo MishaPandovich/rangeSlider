@@ -4,15 +4,20 @@ import Controller from './controller/controller.js';
 
 ;(function($) {
   var defaults = {
-    text: 'hi'
+    min: 0,
+    max: 120, 
+    step: 15,
+    startValue: 30,
+    range: false
   }
 
   var methods = {
      init : function(parentElem) {
-      // this.text)
-      const view = new View(parentElem, this.text);
-      const model = new Model();
-      const controller = new Controller(view, model);
+      const model = new Model(this.min, this.max, this.step);
+      const view = new View(parentElem, this.range, this.startValue);
+      const controller = new Controller(model, view);
+
+      controller.initControlSlider();
      },
 
      update: function(config, parentElem) {

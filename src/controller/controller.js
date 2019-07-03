@@ -1,17 +1,19 @@
 export default class Controller {
-  constructor(objectView, objectModel) {
+  constructor(objectModel, objectView) {
     this.model = objectModel;
     this.view  = objectView;
-
-    this.initControlSlider();
   }
 
   initControlSlider() {
+    this.view.setStartValue(this.view.thumbOne, this.model.range);
     this._mousedownThumb(this.view.thumbOne);
     this._mousemoveThumb(this.view.thumbOne);
     this._mouseupThumb();
+
+    this.clickOnLine();
   }
 
+  /*---------------------------Функции отвечающие за передвижение ползунка----------------------------*/
   /*нажатие на бегунок*/
   _mousedownThumb(thumb) {
     thumb.onmousedown = () => {
@@ -29,7 +31,7 @@ export default class Controller {
       this._minPosThumb();
       this._maxPosThumb(thumb);
 
-      this.view.changePositionThumb(thumb, this.positionThumb);
+      this.view.changePositionThumb(thumb, this.positionThumb, this.model.stepCount, this.model.step);
     }
   }
 
@@ -40,7 +42,7 @@ export default class Controller {
     }
   }
 
-  /*----------------------------------Вспомогательные функции--------------------------------------------*/
+  /*----------------------------------Вспомогательные функции-------------------------------------------*/
   _minPosThumb() {
     if (this.positionThumb < 0) {
         this.positionThumb = 0;
@@ -52,4 +54,21 @@ export default class Controller {
         this.positionThumb = (thumb.parentElement.offsetWidth - thumb.offsetWidth);
     }
   }
+
+  /*--------нажатие на линию----------*/
+
+  clickOnLine() {
+    this.view.line.onclick = () => {
+      let positionCursor = event.pageX - this.view.line.offsetLeft;
+
+      this.view._setPositionThumb(this.view.thumbOne, positionCursor);
+      this.view._setLine(positionCursor, this.model.stepCount, this.model.step);
+    }
+  }
 }
+
+
+// разработка шага с минимальным и максимальным значением шаг 15
+// установить min и max (прим от 0 до 120)
+// узнать сколько шагов вместиться в этом диапозоне 120/15
+// узнать сколько пискелей будет занимать каждый шаг
