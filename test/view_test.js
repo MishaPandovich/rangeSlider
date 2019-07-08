@@ -37,6 +37,8 @@ describe('Тестирование отрисовки DOM-элементов в 
   })
 })
 
+// проверка типов введенных знаяении и если что то не правильно должна обрабптываться ошибка
+
 
 import Model from '../src/model/model.js'
 import Controller from '../src/controller/controller.js'

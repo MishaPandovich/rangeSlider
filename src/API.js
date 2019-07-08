@@ -5,9 +5,9 @@ import Controller from './controller/controller.js';
 ;(function($) {
   var defaults = {
     min: 0,
-    max: 120, 
-    step: 15,
-    startValue: 30,
+    max: 130, 
+    step: 60,
+    startValue: 20,
     range: false
   }
 

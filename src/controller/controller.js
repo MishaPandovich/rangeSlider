@@ -5,17 +5,17 @@ export default class Controller {
   }
 
   initControlSlider() {
-    this.view.setStartValue(this.view.thumbOne, this.model.range);
-    this._mousedownThumb(this.view.thumbOne);
-    this._mousemoveThumb(this.view.thumbOne);
-    this._mouseupThumb();
+    //this.view.setStartValue(this.view.thumbOne, this.model.range);
+    this._mousedownOnThumb(this.view.thumbOne);
+    this._mousemoveOnThumb(this.view.thumbOne);
+    this._mouseupOnThumb();
 
-    this.clickOnLine();
+    //this.clickOnLine();
   }
 
   /*---------------------------Функции отвечающие за передвижение ползунка----------------------------*/
   /*нажатие на бегунок*/
-  _mousedownThumb(thumb) {
+  _mousedownOnThumb(thumb) {
     thumb.onmousedown = () => {
       this.model.dragStatus = true;
       this.shiftX = event.pageX - thumb.offsetLeft; 
@@ -23,7 +23,7 @@ export default class Controller {
   }
 
   /*передвижение бегунка*/
-  _mousemoveThumb(thumb) {
+  _mousemoveOnThumb(thumb) {
     document.onmousemove = () => {
       if (!this.model.dragStatus) return false;
 
@@ -31,12 +31,12 @@ export default class Controller {
       this._minPosThumb();
       this._maxPosThumb(thumb);
 
-      this.view.changePositionThumb(thumb, this.positionThumb, this.model.stepCount, this.model.step);
+      this.view.moveThumb(thumb, this.positionThumb, this.model.range, this.model.step);
     }
   }
 
   /*отпускание бегунка*/
-  _mouseupThumb() {
+  _mouseupOnThumb() {
     document.onmouseup = () => {
       this.model.dragStatus = false;
     }
@@ -57,18 +57,11 @@ export default class Controller {
 
   /*--------нажатие на линию----------*/
 
-  clickOnLine() {
+  /*clickOnLine() {
     this.view.line.onclick = () => {
       let positionCursor = event.pageX - this.view.line.offsetLeft;
 
-      this.view._setPositionThumb(this.view.thumbOne, positionCursor);
-      this.view._setLine(positionCursor, this.model.stepCount, this.model.step);
+      this.view.changePositionThumb(this.view.thumbOne, positionCursor, this.model.stepCount, this.model.step);
     }
-  }
+  }*/
 }
-
-
-// разработка шага с минимальным и максимальным значением шаг 15
-// установить min и max (прим от 0 до 120)
-// узнать сколько шагов вместиться в этом диапозоне 120/15
-// узнать сколько пискелей будет занимать каждый шаг

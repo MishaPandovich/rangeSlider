@@ -18,50 +18,49 @@ export default class View {
   }
 
   /*---------------------------------Расположение бегунка--------------------------------------------*/
-  // range - переназвать
-  setStartValue(thumb, range) {
-    let position = this.line.offsetWidth / (range / this.startValue);
+  
+  // 1. передвижен ползунка
+  moveThumb(thumb, position, range, step) {
+    this._setPosThumb(position);
 
-    this._setPositionThumb(thumb, position);
-    this._showValue(this.startValue);
+    let left = this._calcStep(position, range, step);
+    thumb.style.left = left + 'px';
+
+    this._showValue(left, range);
   }
 
-  changePositionThumb(thumb, left, stepCount, step) {
-    let stepSize = this.line.offsetWidth / stepCount;
-    let position = Math.round(left / stepSize) * stepSize;
-
-    this._setPositionThumb(thumb, position);
-    this._calcValue(position, stepSize, step);
-  }
-
-  _calcValue(position, stepSize, step) {
-    let value = (position / stepSize) * step;
-    this._showValue(value);
-  }
-
-  _setPositionThumb(thumb, position) {
-    if (position > (this.line.offsetWidth - thumb.offsetWidth)) {
-      position = (this.line.offsetWidth - thumb.offsetWidth);
-    }
-
+  _setPosThumb(position) {
     if (position < 0) {
-      position = 0;
+        position = 0;
     }
 
-    thumb.style.left = position + 'px';
+    if (position >= this.line.offsetWidth) {
+        position = this.line.offsetWidth;
+    } 
   }
 
-  // установка значения при нажатии на линию
-  _setLine(position, stepCount, step) {
-    let stepSize = this.line.offsetWidth / stepCount;
-    let value = Math.round((position / stepSize) * step);
+  _calcStep(position, range, step) {
+    let stepCount = range / step;
+    let stepSize  = Math.round(this.line.offsetWidth / stepCount); 
 
-    this._showValue(value);
+    let roundStepCount = Math.round(range / step); 
+    let remainder      = range - (roundStepCount * step);
+    let left;
+
+    ((this.line.offsetWidth - position) <= remainder) ? 
+    left = this.line.offsetWidth : 
+    left = Math.round(position /stepSize) * stepSize;
+
+    if (left >= this.line.offsetWidth) { left = this.line.offsetWidth};
+
+    return left;
   }
 
-  _showValue(value) {
-    document.getElementsByTagName('p')[0].innerHTML = value;
+  _showValue(left, range) {
+    let value = this.line.offsetWidth / range;
+    document.querySelector('.value').textContent = Math.round(left / value);
   }
+
 
   /*---------------------------------Создание элементов--------------------------------------------*/
   _createLine() {    
