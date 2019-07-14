@@ -1,5 +1,6 @@
 export default class View {
   constructor(parentElem, range, startValue) {
+    // переименовать range в statusRange
     this.parentElem = parentElem;
     this.line;
     this.rangeLine;
@@ -19,7 +20,21 @@ export default class View {
 
   /*---------------------------------Расположение бегунка--------------------------------------------*/
   
-  // 1. передвижен ползунка
+  // 1. передвижен ползунка +
+  // 2. установка первоначального значения (если слайдер одиночный) +
+  // 3. нажатие на линию +
+  // 4. сделать типо демо страницу
+
+  // рефакторинг выходные
+
+  setStartValue(thumb, range) {
+    let stepCount = range / this.startValue;
+    let stepSize  =  Math.round(this.line.offsetWidth / stepCount); 
+
+    thumb.style.left = stepSize + 'px';
+    document.querySelector('.value').textContent = this.startValue;
+  }
+
   moveThumb(thumb, position, range, step) {
     this._setPosThumb(position);
 
@@ -31,7 +46,7 @@ export default class View {
 
   _setPosThumb(position) {
     if (position < 0) {
-        position = 0;
+        position = 0; // min
     }
 
     if (position >= this.line.offsetWidth) {

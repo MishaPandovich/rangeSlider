@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<title>RangeSlider</title>
+  <meta charset="UTF-8">
+  <title>RangeSlider</title>
   <script src="js/jquery.range-slider.js"></script>
   <link rel="stylesheet" type="text/css" href="style/style.css">
   <link rel="stylesheet" type="text/css" href="style/theme-1.css">
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper wrapper-sl-1">
   	<p class="value">---</p>
     <div id="slider"></div>
+	
+	<br>
+	<label>min:<br>
+		<input type="text" id="min">
+	</label><br>
+	<label>max:<br>
+		<input type="text" id="max">
+	</label><br>
+	<label>step:<br>
+		<input type="text" id="step">
+	</label>
   </div>
+
+  <button class="range">Range</button>
 </body>
 </html>

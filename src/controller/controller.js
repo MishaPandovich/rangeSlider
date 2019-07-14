@@ -5,12 +5,16 @@ export default class Controller {
   }
 
   initControlSlider() {
-    //this.view.setStartValue(this.view.thumbOne, this.model.range);
+    this.view.setStartValue(this.view.thumbOne, this.model.range);
+
     this._mousedownOnThumb(this.view.thumbOne);
     this._mousemoveOnThumb(this.view.thumbOne);
     this._mouseupOnThumb();
 
-    //this.clickOnLine();
+    this.clickOnLine();
+
+
+    this.changeCoords(this.view.thumbOne);
   }
 
   /*---------------------------Функции отвечающие за передвижение ползунка----------------------------*/
@@ -56,12 +60,16 @@ export default class Controller {
   }
 
   /*--------нажатие на линию----------*/
-
-  /*clickOnLine() {
+  clickOnLine() {
     this.view.line.onclick = () => {
       let positionCursor = event.pageX - this.view.line.offsetLeft;
 
-      this.view.changePositionThumb(this.view.thumbOne, positionCursor, this.model.stepCount, this.model.step);
+      this.view.moveThumb(this.view.thumbOne, positionCursor, this.model.range, this.model.step);
     }
-  }*/
+  }
+
+  // функция которая отслеживает изменения координат
+  changeCoords(thumb) {
+    console.log(thumb.style.left);
+  }
 }
