@@ -2,6 +2,7 @@ import Model from './model/model.js';
 import View from './view/view.js';
 import Controller from './controller/controller.js';
 import Demo from './view/demo.js'; // можно удалить
+import ViewSlider from './view/view-horizontal.js';
 
 ;(function($) {
   var defaults = {
@@ -9,18 +10,23 @@ import Demo from './view/demo.js'; // можно удалить
     max: 130, // если разница с шагом меньше 10 не доходит до конца 666
     step: 60,
     startValue: 50,
-    range: false,
+    statusRange: true,
+    input: true,
+    statusVert: false
   }
 
   var methods = {
      init : function(parentElem) {
 
-      const model = new Model(this.min, this.max, this.step);
-      const view = new View(parentElem, this.range, this.startValue);
-      const controller = new Controller(model, view);
-      const demo = new Demo(view, model); // можно удалить
+      const view = new View(parentElem, this.statusVert, this.statusRange);
+      //const viewSldier = new ViewSlider(parentElem, this.range, this.input, this.statusVert);
 
-      controller.initControlSlider();
+      //const model = new Model(this.min, this.max, this.step);
+      //const view = new View(parentElem, this.range, this.startValue);
+      //const controller = new Controller(model, view);
+      //const demo = new Demo(view, model); // можно удалить
+
+      //controller.initControlSlider();
      },
 
      update: function(config, parentElem) {
