@@ -1,8 +1,8 @@
 import Model from './model/model.js';
 import View from './view/view.js';
 import Controller from './controller/controller.js';
-import Demo from './view/demo.js'; // можно удалить
-import ViewSlider from './view/view-horizontal.js';
+
+import Facade from './facade/view-controller.js';
 
 ;(function($) {
   var defaults = {
@@ -10,23 +10,19 @@ import ViewSlider from './view/view-horizontal.js';
     max: 130, // если разница с шагом меньше 10 не доходит до конца 666
     step: 60,
     startValue: 50,
-    statusRange: true,
-    input: true,
+    statusRange: false,
     statusVert: false
   }
 
+  // создать фасад
+
   var methods = {
      init : function(parentElem) {
-
-      const view = new View(parentElem, this.statusVert, this.statusRange);
-      //const viewSldier = new ViewSlider(parentElem, this.range, this.input, this.statusVert);
-
-      //const model = new Model(this.min, this.max, this.step);
-      //const view = new View(parentElem, this.range, this.startValue);
-      //const controller = new Controller(model, view);
-      //const demo = new Demo(view, model); // можно удалить
-
-      //controller.initControlSlider();
+      const facade = new Facade(parentElem , this.statusVert, this.statusRange);
+      /*const observer   = new Observer();*/
+      /*const model      = new Model();
+      const controller = new Controller(model);
+      const view       = new View(parentElem, this.statusVert, this.statusRange);*/
      },
 
      update: function(config, parentElem) {
