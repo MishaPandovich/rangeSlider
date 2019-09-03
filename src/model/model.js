@@ -7,18 +7,5 @@ export default class Model {
     this.step = step;
     this.range = (this.max - this.min);
     this.stepCount = this.range / this.step;
-
-   // this.subscribeObEvent();
-    console.log(this.dragStatus);
-  }
-
-  subscribeObEvent() {
-    this.obs.add('click', this.changeDragStatus);
-  }
-
-  changeDragStatus() {
-    this.dragStatus = true;
-
-    console.log(this.dragStatus);
   }
 }

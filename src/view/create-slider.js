@@ -1,7 +1,5 @@
 export default class View {
-  constructor(parentElem, statusVert, statusRange, objectObserver) {
-    let self = this;
-    this.obs = objectObserver;
+  constructor(parentElem, statusVert, statusRange) {
     this.parentElem = parentElem;
     this.line;
     this.thumbOne;
@@ -10,41 +8,7 @@ export default class View {
     this.hintTwo;
 
     this._createSlider(statusVert, statusRange);
-
-    var sef = this;
-    //this._calcThumb(this.thumbOne, sef);
   }
-
-  /*_initSlider(obj) {
-    this.obs.notify('click', obj);
-  }*/
-
-  /*_calcThumb(elemen, sef) {
-    elemen.addEventListener('click', function() {
-        let obj = {
-        hi: 20
-      }
-
-      obj.pageX = event.pageX;
-      obj.offsetLeft = elemen.offsetLeft;
-      
-    sef.obs.notify('click', obj);
-    });*/
-
-
-   /* elemen.addEventListener('mousemove', function() {
-        let obj = {
-        hi: 20
-      }
-
-      obj.pageX = event.pageX;
-      obj.offsetLeft = elemen.offsetLeft;
-
-    console.log(this);
-
-    sef.obs.notify('move', obj);
-    });*/
-  //}
 
   _createSlider(statusVert, statusRange) {
     if (statusVert) this.parentElem.classList.add('vert');
@@ -54,7 +18,7 @@ export default class View {
     this.parentElem.appendChild(this.line);
   }
 
-  _createLine(statusVert) {
+  _createLine() {
     this.line = this._createElement('line', 'div');
     let rangeLine = this._createElement('range-line', 'div');
 
