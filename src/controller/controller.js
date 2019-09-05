@@ -1,14 +1,21 @@
 export default class Controller {
-  constructor(objectModel, objectMoveThumb) {
-    this.model = objectModel;
-    this.view  = objectMoveThumb;
+  constructor() {
   }
 
   _down(thumb) {
-    this.shift = thumb.position - thumb.coordinate;
+    this.shiftX = thumb.position - thumb.coordinate;
   }
 
-  _mouse(thumb) {
-    return thumb.position - this.shift;
+  _move(thumb) {
+    this.positionThumb = thumb.position - this.shiftX;
+    return this.positionThumb;
+  }
+
+  _up() {
+    return false;
+  } 
+
+  _click(thumb) {
+    return thumb.position - thumb.lineCoordinate;
   }
 }

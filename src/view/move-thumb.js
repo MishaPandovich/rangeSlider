@@ -1,47 +1,19 @@
-export default class moveThumb {
-	constructor(objectView) {
-    this.view = objectView;
+export default class MoveThumb {
+  constructor(objectCreateSlider, objectShowValue) {
+    this.view = objectCreateSlider;
+    this.show = objectShowValue;
   }
 
-  _moveThumb(element, position) {
+  _moveThumb(element, position, range) {
+    if (position <= 0) {
+        position = 0;
+    }
+
+    if (position >= (this.view.line.offsetWidth - this.view.thumbOne.offsetWidth)) {
+        position = (this.view.line.offsetWidth - this.view.thumbOne.offsetWidth);
+    }
+
     element.style.left = position + 'px';
-    this._minPosThumb(element, position);
-    this._maxPosThumb(element, position);
+    this.show._showValue(position, range);
   }
-
-  _moveThumbVert(element, position) {
-    element.style.top = position + 'px';
-    this._minPosThumbVert(element, position);
-    this._maxPosThumbVert(element, position);
-  }
-
-  _moveThumbOne(element, position) {  
-    console.log(position);
-  }
-
-
-
-  _minPosThumb(element, position) {
-    if (position <= 0) {
-      element.style.left = 0 + 'px';
-    }
-  }
-
-  _maxPosThumb(element, position) {
-    if (position >= (this.view.line.offsetWidth - element.offsetWidth)) {
-      element.style.left = (this.view.line.offsetWidth - element.offsetWidth) + 'px';
-    }
-  }
-
-  _minPosThumbVert(element, position) {
-    if (position <= 0) {
-      element.style.top = 0 + 'px';
-    }
-  }
-
-  _maxPosThumbVert(element, position) {
-    if (position >= (this.view.line.offsetHeight - element.offsetHeight)) {
-      element.style.top = (this.view.line.offsetHeight - element.offsetHeight) + 'px';
-    }
-  }
-} 
+}

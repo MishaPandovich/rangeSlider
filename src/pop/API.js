@@ -2,7 +2,7 @@
 import Controller from './controller/controller.js';
 import Model from './model/model.js';*/
 
-import Facade from './facade/facade.js';
+import Facade from './facade/viewXcontroller.js';
 
 ;(function($) {
   var defaults = {
@@ -16,7 +16,10 @@ import Facade from './facade/facade.js';
 
   var methods = {
      init : function(parentElem) {
-      const facade = new Facade(parentElem);
+      const facade = new Facade(parentElem, this.statusVert, this.statusRange);
+      /*const model      = new Model();
+      const controller = new Controller(model);
+      const view       = new View(parentElem, this.statusVert, this.statusRange);*/
      },
 
      update: function(config, parentElem) {
