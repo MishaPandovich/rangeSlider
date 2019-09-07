@@ -7,8 +7,8 @@ import Facade from './facade/facade.js';
 ;(function($) {
   var defaults = {
     min: 0,
-    max: 130, // если разница с шагом меньше 10 не доходит до конца 666
-    step: 60,
+    max: 1000, // если разница с шагом меньше 10 не доходит до конца 666
+    step: 120,
     startValue: 50,
     statusRange: false,
     statusVert: false
@@ -16,7 +16,7 @@ import Facade from './facade/facade.js';
 
   var methods = {
      init : function(parentElem) {
-      const facade = new Facade(parentElem);
+      const facade = new Facade(parentElem, this.min, this.max, this.step);
      },
 
      update: function(config, parentElem) {

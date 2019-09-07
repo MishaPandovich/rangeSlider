@@ -5,11 +5,11 @@ import Controller from '../controller/controller.js';
 import Model from '../model/model.js';
 
 export default class Facade {
-	constructor(parentElement) {
+	constructor(parentElement, min, max, step) {
     this.view = new CreateSlider(parentElement);
-    this.show = new ShowValue(this.view);
+    this.show = new ShowValue(this.view, min, max, step);
     this.move = new MoveThumb(this.view, this.show);
-    this.model = new Model(0, 100);
+    this.model = new Model(min, max, step);
     this.controller = new Controller(this.model);
 
     this.thumb = {};
@@ -27,7 +27,6 @@ export default class Facade {
 
       this.thumb.position = event.pageX;
       this.thumb.coordinate = thumb.offsetLeft;
-
       this.controller._down(this.thumb);
 
       document.onmousemove = () => {
@@ -36,13 +35,17 @@ export default class Facade {
         this.thumb.position = event.pageX;
         let position = this.controller._move(this.thumb);
 
-        this.move._moveThumb(thumb, position, this.model.range);
+        this.move._moveThumb(thumb, position, this.model.range, this.model.step);
       }
-    }
 
-    document.onmouseup = () => {
-      this.model.dragStatus = this.controller._up();
-    }
+      document.onmouseup = () => {
+        this.model.dragStatus = this.controller._up();
+      }
+    };
+
+    thumb.ondragstart = function() {
+     return false;
+    };
   }
 
   _initClickMouse(line, thumb) {
@@ -51,7 +54,7 @@ export default class Facade {
       this.thumb.lineCoordinate = line.offsetLeft;
       let positionCursor = this.controller._click(this.thumb);
 
-      this.move._moveThumb(thumb, positionCursor, this.model.range);
+      this.move._moveThumb(thumb, positionCursor, this.model.range, this.model.step);
     }
   }
 }
