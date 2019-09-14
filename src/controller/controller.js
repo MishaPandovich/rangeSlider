@@ -1,21 +1,43 @@
 export default class Controller {
-  constructor() {
+  constructor(ModelObject, MoveObject) {
+    this.model = ModelObject;
+    this.move = MoveObject;
   }
 
   _down(thumb) {
-    this.shiftX = thumb.position - thumb.coordinate;
+    thumb.onmousedown = () => {
+      this.model.dragStatus = true;
+      this.shiftX = event.pageX - thumb.offsetLeft;
+
+      //this.move._pop(this.positionThumb);
+
+      console.log(this.shiftX);
+
+      this._move(thumb);
+      this._up(thumb);
+    }
   }
 
   _move(thumb) {
-    this.positionThumb = thumb.position - this.shiftX;
-    return this.positionThumb;
+    document.onmousemove = () => {
+      if (!this.model.dragStatus) return false;
+      this.positionThumb = event.pageX - this.shiftX;
+      this.move._moveThumb(thumb, this.positionThumb, this.model.range, this.model.step);
+    }
   }
 
   _up() {
-    return false;
+    document.onmouseup = () => {
+      this.model.dragStatus = false;
+    }
   } 
 
-  _click(thumb) {
-    return thumb.position - thumb.lineCoordinate;
+  _click(line, thumb) {
+    line.onclick = () => {
+      let positionCursor = event.pageX - line.offsetLeft;
+
+      console.log(thumb);
+      this.move._moveThumb(thumb, positionCursor, this.model.range, this.model.step);
+    }
   }
 }

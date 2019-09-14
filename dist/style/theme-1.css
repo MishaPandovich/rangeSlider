@@ -22,6 +22,12 @@
   border-radius: 20px;
   background: #e75735;
   cursor: pointer;
+
+  z-index: 1;
+}
+
+.slider__thumb-one{
+  z-index: 2;
 }
 
 .slider__thumb-two {

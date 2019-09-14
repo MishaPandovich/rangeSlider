@@ -7,16 +7,16 @@ import Facade from './facade/facade.js';
 ;(function($) {
   var defaults = {
     min: 0,
-    max: 1000, // если разница с шагом меньше 10 не доходит до конца 666
-    step: 120,
+    max: 100, // если разница с шагом меньше 10 не доходит до конца 666
+    step: 10,
     startValue: 50,
-    statusRange: false,
+    statusRange: true,
     statusVert: false
   }
 
   var methods = {
      init : function(parentElem) {
-      const facade = new Facade(parentElem, this.min, this.max, this.step);
+      const facade = new Facade(parentElem, this.min, this.max, this.step, this.statusRange);
      },
 
      update: function(config, parentElem) {
