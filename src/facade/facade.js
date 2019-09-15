@@ -8,8 +8,8 @@ export default class Facade {
 	constructor(parentElement, min, max, step, statusRange) {
     this.view = new CreateSlider(parentElement);
     this.show = new ShowValue(this.view, min, max, step);
-    this.move = new MoveThumb(this.view, this.show, statusRange);
     this.model = new Model(min, max, step);
+    this.move = new MoveThumb(this.view, this.show, statusRange, this.model.dragStatus);
     this.controller = new Controller(this.model, this.move);
 
     this._initSlider(statusRange);
@@ -18,11 +18,11 @@ export default class Facade {
 
   _initSlider(statusRange) {
     this.controller._down(this.view.thumbOne);
-    //this.controller._click(this.view.line, this.view.thumbOne);
+    this.controller._click(this.view.line, this.view.thumbOne);
 
     if (statusRange) {
       this.controller._down(this.view.thumbTwo);
-      //this.controller._click(this.view.line, this.view.thumbTwo);
+      this.controller._click(this.view.line, this.view.thumbTwo);
     }
   }
 

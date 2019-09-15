@@ -8,7 +8,7 @@ import Facade from './facade/facade.js';
   var defaults = {
     min: 0,
     max: 100, // если разница с шагом меньше 10 не доходит до конца 666
-    step: 10,
+    step: 12,
     startValue: 50,
     statusRange: true,
     statusVert: false

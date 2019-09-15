@@ -1,22 +1,18 @@
 export default class MoveThumb {
-  constructor(objectCreateSlider, objectShowValue, statusRange) {
+  constructor(objectCreateSlider, objectShowValue, statusRange, drag) {
     this.view = objectCreateSlider;
     this.show = objectShowValue;
     this.statusRange = statusRange;
+
+    this.dragStatus = drag;
   }
 
   _moveThumb(element, position, range, step) {
     let newPosition = this._calcStep(position, range, step);
-    //this.indexElem(element, newPosition);
-
+    this._pop();
     element.style.left = newPosition + 'px';
 
-    /*this._pop(position);*/
-
-    //element.style.left = newPosition + 'px';
-
     this._posElement(element, newPosition);
-    //this._changeZIndexThumb(element);
     this.show._showValue(element, newPosition, this.stepSize);
 
   }
@@ -28,32 +24,13 @@ export default class MoveThumb {
     return stepPosition;
   }
 
-  _pop(position) {
+  _pop() {
     if (parseInt(this.view.thumbOne.style.left) === parseInt(this.view.thumbTwo.style.left)) {
-
-      console.log(position < parseInt(this.view.thumbOne.style.left));
+      this.view.thumbOne.classList.add('slider__thumb-ones');  
+    } else {
+      this.view.thumbOne.classList.remove('slider__thumb-ones');
     }
   }
-
-  /*_changeZIndexThumb(element) {
-    if (element == this.view.thumbOne) {
-        element.style.zIndex = 2;
-        this.view.thumbTwo.style.zIndex = 1;
-    } else {
-        element.style.zIndex = 2;
-        this.view.thumbOne.style.zIndex = 1;
-    }
-  }*/
-
- /* indexElem(element, position) {
-    if (position < parseInt(this.view.thumbOne.style.left)) {
-        this.view.thumbOne.style.zIndex = 2;
-        this.view.thumbTwo.style.zIndex = 1;
-    } else {
-        this.view.thumbTwo.style.zIndex = 2;
-        this.view.thumbOne.style.zIndex = 1;
-    }
-  }*/
 
   _posElement(element, position) {
     if (this.statusRange) {

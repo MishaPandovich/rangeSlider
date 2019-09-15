@@ -26,7 +26,11 @@
   z-index: 1;
 }
 
-.slider__thumb-one{
+.slider__thumb-ones {
+  width: 10px;
+  border-radius: 20px 0 0 20px;
+  background-color: green;
+
   z-index: 2;
 }
 
