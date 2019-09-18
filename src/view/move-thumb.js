@@ -7,14 +7,42 @@ export default class MoveThumb {
     this.dragStatus = drag;
   }
 
+  _calcRange(position, range, step) {
+    let leftEdgeThumbOne = this.view.thumbOne.offsetLeft;
+    let leftEdgeThumbTwo = this.view.thumbTwo.offsetLeft;
+
+    let distancefromThumbOne = position - leftEdgeThumbOne;
+    let distancefromThumbTwo = position - leftEdgeThumbTwo;
+
+    this._compareDistance(distancefromThumbOne, distancefromThumbTwo, position, range, step);
+  }
+
+  _compareDistance(thumbOne, thumbTwo, position, range, step) {
+    if (Math.abs(thumbOne) < Math.abs(thumbTwo)) {
+      this._moveThumb(this.view.thumbOne, position, range, step);
+    } else {
+      this._moveThumb(this.view.thumbTwo, position, range, step);
+    }
+
+    if (thumbOne === thumbTwo) {
+      if (thumbOne < 0) {
+        this._moveThumb(this.view.thumbOne, position, range, step);
+        this._removeClassThumb();
+      } else {
+        this._moveThumb(this.view.thumbTwo, position, range, step);
+        this._removeClassThumb();
+      }
+    }
+  }
+
   _moveThumb(element, position, range, step) {
     let newPosition = this._calcStep(position, range, step);
-    this._pop();
+     
+    if (this.statusRange) { this._mergeThumbs(); }
     element.style.left = newPosition + 'px';
 
     this._posElement(element, newPosition);
     this.show._showValue(element, newPosition, this.stepSize);
-
   }
 
   _calcStep(position, range, step) {
@@ -24,28 +52,21 @@ export default class MoveThumb {
     return stepPosition;
   }
 
-  _pop() {
-    if (parseInt(this.view.thumbOne.style.left) === parseInt(this.view.thumbTwo.style.left)) {
-      this.view.thumbOne.classList.add('slider__thumb-ones');  
-    } else {
-      this.view.thumbOne.classList.remove('slider__thumb-ones');
-    }
-  }
-
   _posElement(element, position) {
-    if (this.statusRange) {
-      if (element == this.view.thumbOne) {
-        this._minPos(element, position);
-        this._maxPosThumbOne(element, position);
-      }
-
-      if (element == this.view.thumbTwo) {
-        this._minPosThumbTwo(element, position);
-        this._maxPos(element, position);
-      }
-    } else {
+    if (!this.statusRange) {
       this._minPos(element, position);
       this._maxPos(element, position);
+    } else {
+
+      if (element === this.view.thumbOne) {
+          this._minPos(element, position);
+          this._maxPosThumbOne(element, position);
+      }
+
+      if (element === this.view.thumbTwo) {
+          this._minPosThumbTwo(element, position);
+          this._maxPos(element, position);
+      }
     }
   }
 
@@ -56,22 +77,45 @@ export default class MoveThumb {
   }
 
   _maxPos(element, position) {
-    if (position >= (this.view.line.offsetWidth - this.view.thumbOne.offsetWidth)) {
-        element.style.left = (this.view.line.offsetWidth - this.view.thumbOne.offsetWidth) + 'px';
+    let rightEdge = this.view.line.offsetWidth - this.view.thumbOne.offsetWidth;
+
+    if (position >= rightEdge) {
+        element.style.left = rightEdge + 'px';
     }
   }
 
   _maxPosThumbOne(element, position) {
-    if (position >= this.view.thumbTwo.offsetLeft) {
-        element.style.left = this.view.thumbTwo.offsetLeft + 'px';
+    let leftEdgeThumbTwo = this.view.thumbTwo.offsetLeft;
+
+    if (position >= leftEdgeThumbTwo) {
+        element.style.left = leftEdgeThumbTwo + 'px';
     }
   }
 
   _minPosThumbTwo(element, position) {
-    if (position <= this.view.thumbOne.offsetLeft) {
-        element.style.left = this.view.thumbOne.offsetLeft + 'px';
+    let leftEdgeThumbOne = this.view.thumbOne.offsetLeft;
 
-        //this.show._maxShowValue(element);
+    if (position <= leftEdgeThumbOne) {
+        element.style.left = leftEdgeThumbOne + 'px';
     }
+  }
+
+  _mergeThumbs() {
+    let posLeftThumbOne = parseInt(this.view.thumbOne.style.left);
+    let posLEftThumbTwo = parseInt(this.view.thumbTwo.style.left);
+
+    if (posLeftThumbOne === posLEftThumbTwo) {
+        this._addClassThumb();
+    } else {
+        this._removeClassThumb();
+    }
+  }
+
+  _addClassThumb() {
+    this.view.thumbOne.classList.add('slider__thumbs-merge');
+  }
+
+  _removeClassThumb() {
+    this.view.thumbOne.classList.remove('slider__thumbs-merge');
   }
 }

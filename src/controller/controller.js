@@ -20,7 +20,6 @@ export default class Controller {
       this.positionThumb = event.pageX - this.shiftX;
 
       this.move._moveThumb(thumb, this.positionThumb, this.model.range, this.model.step);
-
     }
   }
 
@@ -30,25 +29,17 @@ export default class Controller {
     }
   } 
 
-// переписать
+  _ondragstart(thumb) {
+    thumb.ondragstart = () => {
+      return false;
+    }
+  }
+
   _click(line, thumb) {
     line.onclick = () => {
-
       let positionCursor = event.pageX - line.offsetLeft;
 
-      if (positionCursor < parseInt(document.querySelector('.slider__thumb-one').style.left)) {
-        this.move._moveThumb(document.querySelector('.slider__thumb-one'), positionCursor, this.model.range, this.model.step);
-      }
-
-      if (positionCursor > parseInt(document.querySelector('.slider__thumb-one').style.left)) {
-        this.move._moveThumb(document.querySelector('.slider__thumb-two'), positionCursor, this.model.range, this.model.step);
-      }
-
-      //console.log(thumb);
-      //this.move._moveThumb(thumb, positionCursor, this.model.range, this.model.step);
-
-
-      /*делать расчет вокруг элемента, если меньшн расстояние между мышкой и бегунком, то это и выбирать*/
+      this.move._calcRange(positionCursor, this.model.range, this.model.step);
     }
   }
 }

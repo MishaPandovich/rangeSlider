@@ -12,10 +12,7 @@ export default class ShowValue {
     this.valueResult = this.min +  Math.round((parseInt(element.style.left) / stepSize) * this.step);
 
     this._minShowValue(element, this.valueResult);
-    this._maxShowValue(this.view.thumbTwo, this.valueResult);
-
-    this._maxShowValueThumb(element, this.valueResult);
-    this._showRangeLine(element, this.valueResult);
+    this._maxShowValue(element, this.valueResult);
 
     document.querySelector('.show').innerText = this.valueResult;
   }
@@ -25,7 +22,7 @@ export default class ShowValue {
     this.lineCoordinateLeft = this.view.line.getBoundingClientRect().left;
 
     if (this.thumbCoordinateLeft === this.lineCoordinateLeft) {
-        this.valueResult = this.min;
+        this.valueResult = 0;
     }
   }
 
@@ -36,16 +33,6 @@ export default class ShowValue {
     if (this.thumbCoordinateRight === this.lineCoordinateRight) {
       this.valueResult = this.max;
     }
-  }
-
-
-  _maxShowValueThumb(element, value) {
-
-    if (parseInt(element.style.left) === parseInt(this.view.thumbTwo.style.left)) {
-      this.valueResult = value;
-    }
-
-    /// тут надо просчитать значение на данном этапе и дальше его не пускать
   }
 
   _showRangeLine(element) {
