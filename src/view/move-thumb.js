@@ -17,6 +17,16 @@ export default class MoveThumb {
     this._compareDistance(distancefromThumbOne, distancefromThumbTwo, position, range, step);
   }
 
+  _startPosition(element, range, step, value) {
+    let stepSize = this._calcPosition(range, step);
+    element.style.left = (stepSize * value) + 'px';
+    this.show._startShowValue(value);
+  }
+
+  _calcPosition(range) {
+    return this.view.line.offsetWidth / range;
+  }
+
   _compareDistance(thumbOne, thumbTwo, position, range, step) {
     if (Math.abs(thumbOne) < Math.abs(thumbTwo)) {
       this._moveThumb(this.view.thumbOne, position, range, step);

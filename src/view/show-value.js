@@ -8,6 +8,10 @@ export default class ShowValue {
     this.valueResult;
   }
 
+  _startShowValue(value) {
+    document.querySelector('.show').innerText = value;
+  }
+
   _showValue(element, position, stepSize) {
     this.valueResult = this.min +  Math.round((parseInt(element.style.left) / stepSize) * this.step);
 

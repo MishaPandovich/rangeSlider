@@ -5,7 +5,7 @@ import Controller from '../controller/controller.js';
 import Model from '../model/model.js';
 
 export default class Facade {
-	constructor(parentElement, min, max, step, statusRange) {
+	constructor(parentElement, min, max, step, statusRange, startValueOne, startValueTwo) {
     this.view = new CreateSlider(parentElement, statusRange);
     this.show = new ShowValue(this.view, min, max, step);
     this.model = new Model(min, max, step);
@@ -13,8 +13,17 @@ export default class Facade {
     this.controller = new Controller(this.model, this.move);
 
     this._initSlider(statusRange);
-    //this.view.thumbTwo.style.left = 31 + 'px';
+    this._startValue(statusRange, max, min, step, startValueOne, startValueTwo);
 	}
+
+  _startValue(statusRange, max, min, step, startValueOne, startValueTwo) {
+    let range = max - min;
+    this.move._startPosition(this.view.thumbOne, range, step, startValueOne);
+    
+    if (statusRange) {
+      this.move._startPosition(this.view.thumbTwo, range, step, startValueTwo);
+    }
+  }
 
   _initSlider(statusRange) {
     this.controller._down(this.view.thumbOne);
