@@ -9,8 +9,8 @@ import Facade from './facade/facade.js';
     min: 0,
     max: 100, // если разница с шагом меньше 10 не доходит до конца 666
     step: 10,
-    startValueThumbOne: 20,
-    startValueThumbTwo: 30,
+    startValueThumbOne: 50,
+    startValueThumbTwo: 60,
     statusRange: true,
     statusVert: false
   }

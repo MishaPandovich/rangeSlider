@@ -7,27 +7,31 @@ export default class MoveThumb {
     this.dragStatus = drag;
   }
 
-  _calcRange(position, range, step) {
-    let leftEdgeThumbOne = this.view.thumbOne.offsetLeft;
-    let leftEdgeThumbTwo = this.view.thumbTwo.offsetLeft;
-
-    let distancefromThumbOne = position - leftEdgeThumbOne;
-    let distancefromThumbTwo = position - leftEdgeThumbTwo;
-
-    this._compareDistance(distancefromThumbOne, distancefromThumbTwo, position, range, step);
-  }
-
   _startPosition(element, range, step, value) {
     let stepSize = this._calcPosition(range, step);
     element.style.left = (stepSize * value) + 'px';
     this.show._startShowValue(value);
+    this._showRangeLine();
   }
 
   _calcPosition(range) {
     return this.view.line.offsetWidth / range;
   }
 
-  _compareDistance(thumbOne, thumbTwo, position, range, step) {
+  _calcRange(position, range, step) {
+    let leftEdgeThumbOne = this.view.thumbOne.offsetLeft;
+    let distancefromThumbOne = position - leftEdgeThumbOne;
+
+    if (!this.statusRange) {
+      this._moveThumb(this.view.thumbOne, position, range, step);
+    } else {
+      let leftEdgeThumbTwo = this.view.thumbTwo.offsetLeft;
+      let distancefromThumbTwo = position - leftEdgeThumbTwo;
+      this._compareDistance(position, range, step, distancefromThumbOne, distancefromThumbTwo);
+    }
+  }
+
+  _compareDistance(position, range, step, thumbOne, thumbTwo) {
     if (Math.abs(thumbOne) < Math.abs(thumbTwo)) {
       this._moveThumb(this.view.thumbOne, position, range, step);
     } else {
@@ -52,6 +56,7 @@ export default class MoveThumb {
     element.style.left = newPosition + 'px';
 
     this._posElement(element, newPosition);
+    this._showRangeLine();
     this.show._showValue(element, newPosition, this.stepSize);
   }
 
@@ -127,5 +132,16 @@ export default class MoveThumb {
 
   _removeClassThumb() {
     this.view.thumbOne.classList.remove('slider__thumbs-merge');
+  }
+
+  _showRangeLine() {
+    if (!this.statusRange) {
+      let positionRangeLine = (this.view.line.offsetWidth - this.view.thumbOne.offsetWidth) - parseInt(this.view.thumbOne.style.left);
+      this.view.rangeLine.style.right = positionRangeLine + 'px';
+    } else {
+      let positionRangeLine = (this.view.line.offsetWidth - this.view.thumbTwo.offsetWidth) - parseInt(this.view.thumbTwo.style.left);
+      this.view.rangeLine.style.left = this.view.thumbOne.style.left;
+      this.view.rangeLine.style.right = positionRangeLine + 'px';
+    }
   }
 }

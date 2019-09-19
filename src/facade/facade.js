@@ -13,16 +13,28 @@ export default class Facade {
     this.controller = new Controller(this.model, this.move);
 
     this._initSlider(statusRange);
-    this._startValue(statusRange, max, min, step, startValueOne, startValueTwo);
+    this._checkSettings(statusRange, max, min, step, startValueOne, startValueTwo);
 	}
 
-  _startValue(statusRange, max, min, step, startValueOne, startValueTwo) {
-    let range = max - min;
-    this.move._startPosition(this.view.thumbOne, range, step, startValueOne);
-    
-    if (statusRange) {
-      this.move._startPosition(this.view.thumbTwo, range, step, startValueTwo);
+  _checkSettings(statusRange, max, min, step, startValueOne, startValueTwo) {
+    if (statusRange === false) {
+      if ((startValueOne >= min) && (startValueOne <= max)) {
+        this._startValue(this.view.thumbOne, statusRange, max, min, step, startValueOne);
+      } 
+    } else {
+      if ((startValueOne >= min) && (startValueOne <= startValueTwo)) {
+        this._startValue(this.view.thumbOne, statusRange, max, min, step, startValueOne);
+      }
+
+      if ((startValueTwo <= max) && (startValueTwo >= startValueOne)) {
+        this._startValue(this.view.thumbTwo, statusRange, max, min, step, startValueTwo);
+      }
     }
+  }
+
+  _startValue(element, statusRange, max, min, step, startValue) {
+    let range = max - min;
+    this.move._startPosition(element, range, step, startValue);
   }
 
   _initSlider(statusRange) {

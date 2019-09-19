@@ -38,9 +38,4 @@ export default class ShowValue {
       this.valueResult = this.max;
     }
   }
-
-  _showRangeLine(element) {
-    let positionRangeLine = (this.view.line.offsetWidth - element.offsetWidth) - parseInt(element.style.left);
-    this.view.rangeLine.style.right = positionRangeLine + 'px';
-  }
 }
