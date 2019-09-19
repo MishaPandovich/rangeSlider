@@ -81,6 +81,33 @@
   border-top: 7px solid #e75735;
 }
 
+.slider__pin-one,
+.slider__pin-two {
+  position: absolute;
+  top: -30px;
+  left: -7px;
+  min-width: 30px;
+  height: 20px;
+  border-radius: 5px;
+  background: #e75735;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 2px;
+  font-weight: bold;
+
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.slider__pin-one.big-width {
+  position: absolute;
+  left: -13px;
+}
+
 /*вертикальный*/
 .vert .slider__line {
   position: relative;
