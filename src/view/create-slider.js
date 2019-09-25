@@ -1,13 +1,18 @@
 export default class CreateSlider {
-	constructor(parentElem, statusRange) {
+	constructor(parentElem, statusRange, statusVert) {
     this.parentElem = parentElem;
-    this._createSlider(statusRange);
+    this._createSlider(statusRange, statusVert);
   }
 
-  _createSlider(statusRange) {
+  _createSlider(statusRange, statusVert) {
+    if (statusVert) {
+      this.parentElem.classList.add('vert');
+    }
+
     this.line = this._createElement('div', 'line');
     this.rangeLine = this._createElement('div', 'range-line');
     this.thumbOne = this._createElement('div', 'thumb-one');
+
     this.pinOne = this._createElement('div', 'pin-one');
 
     this.line.appendChild(this.rangeLine);

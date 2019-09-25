@@ -4,22 +4,31 @@ export default class Controller {
     this.move = MoveObject;
   }
 
-  _down(thumb) {
+  _down(thumb, statusVert) {
     thumb.onmousedown = () => {
       this.model.dragStatus = true;
-      this.shiftX = event.pageX - thumb.offsetLeft;
+      if (statusVert) {
+        this.shiftY = event.pageY - thumb.offsetTop;
+      } else {
+        this.shiftX = event.pageX - thumb.offsetLeft;
+      }
 
-      this._move(thumb);
+      this._move(thumb, statusVert);
       this._up(thumb);
     }
   }
 
-  _move(thumb) {
+  _move(thumb, statusVert) {
     document.onmousemove = () => {
       if (!this.model.dragStatus) return false;
-      this.positionThumb = event.pageX - this.shiftX;
+      
+      if (statusVert) {
+        this.positionThumb = event.pageY - this.shiftY;
+      } else {
+        this.positionThumb = event.pageX - this.shiftX;
+      }
 
-      this.move._moveThumb(thumb, this.positionThumb, this.model.range, this.model.step);
+      this.move._moveThumb(thumb, this.positionThumb, this.model.range, this.model.step, statusVert);
     }
   }
 

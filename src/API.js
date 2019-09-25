@@ -12,13 +12,13 @@ import Facade from './facade/facade.js';
     startValueThumbOne: 50,
     startValueThumbTwo: 60,
     statusRange: true,
-    statusVert: false
+    statusVert: true
   }
 
   var methods = {
      init : function(parentElem) {
       const facade = new Facade(parentElem, this.min, this.max, this.step, this.statusRange, 
-      this.startValueThumbOne, this.startValueThumbTwo);
+      this.statusVert, this.startValueThumbOne, this.startValueThumbTwo);
      },
 
      update: function(config, parentElem) {

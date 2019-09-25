@@ -49,15 +49,51 @@ export default class MoveThumb {
     }
   }
 
-  _moveThumb(element, position, range, step) {
-    let newPosition = this._calcStep(position, range, step);
-     
-    if (this.statusRange) { this._mergeThumbs(); }
-    element.style.left = newPosition + 'px';
+  _moveThumb(element, position, range, step, statusVert) {
+    let newPosition;
+    
+    if (statusVert) {
+      newPosition = this._calcVertStep(position, range, step);
 
-    this._posElement(element, newPosition);
-    this._showRangeLine();
-    this.show._showValue(element, newPosition, this.stepSize);
+      console.log(newPosition);
+    } else {
+      newPosition = this._calcStep(position, range, step);
+    }
+
+    if (this.statusRange) { this._mergeThumbs(); }
+
+    if (statusVert) {
+      element.style.top = newPosition + 'px';
+      // потом убрать
+    } else {
+      element.style.left = newPosition + 'px';
+    }
+
+    this._posVert(element, newPosition);
+
+    //this._posElement(element, newPosition);
+    //this._showRangeLine();
+    //this.show._showValue(element, newPosition, this.stepSize);
+  }
+
+  _posVert(element, position) {
+    if (position <= 0) {
+      element.style.top = 0 + 'px';
+    }
+
+
+    let topEdge = this.view.line.offsetHeight - this.view.thumbOne.offsetHeight;
+    
+    if (position >= topEdge) {
+        element.style.top = topEdge + 'px';
+    }
+  }
+
+  _calcVertStep(position, range, step) {
+    this.stepSize = (this.view.line.offsetHeight / (range / step)); 
+    let stepPosition = Math.round(position / this.stepSize) * this.stepSize;
+
+    return stepPosition;
   }
 
   _calcStep(position, range, step) {
@@ -91,11 +127,20 @@ export default class MoveThumb {
     }
   }
 
-  _maxPos(element, position) {
-    let rightEdge = this.view.line.offsetWidth - this.view.thumbOne.offsetWidth;
+  _maxPos(element, position, statusVert) {
 
-    if (position >= rightEdge) {
-        element.style.left = rightEdge + 'px';
+    if (statusVert) {
+      let rightEdge = this.view.line.offsetTop - this.view.thumbOne.offsetTop;
+
+      if (position >= rightEdge) {
+          element.style.top = rightEdge + 'px';
+      }
+    } else {
+      let rightEdge = this.view.line.offsetWidth - this.view.thumbOne.offsetWidth;
+
+      if (position >= rightEdge) {
+          element.style.left = rightEdge + 'px';
+      }
     }
   }
 
@@ -134,7 +179,7 @@ export default class MoveThumb {
     this.view.thumbOne.classList.remove('slider__thumbs-merge');
   }
 
-  _showRangeLine() {
+  _showRangeLine(statusVert) {
     if (!this.statusRange) {
       let positionRangeLine = (this.view.line.offsetWidth - this.view.thumbOne.offsetWidth) - parseInt(this.view.thumbOne.style.left);
       this.view.rangeLine.style.right = positionRangeLine + 'px';
