@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import jsdom from 'jsdom'
-import View from '../src/view/view.js'
+import View from '../src/view/createSlider.js'
 
 const {JSDOM} = jsdom
 const dom = new JSDOM('<html><body><div id="slider"></div></body></html>')
@@ -25,46 +25,53 @@ describe('Тестирование отрисовки DOM-элементов в 
     expect(document.querySelectorAll('.slider__line').length).to.equal(1)
     expect(document.querySelectorAll('.slider__range-line').length).to.equal(1)
     expect(document.querySelectorAll('.slider__thumb-one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__wrap-hint--one').length).to.equal(1)
     expect(document.querySelectorAll('.slider__hint-one').length).to.equal(1)
   })
 
+
   it('создание слайдера (с двумя бегунками)', () => {
-    const view = new View(parentElement, false, true)
+     const view = new View(parentElement, false, true)
 
     expect(document.querySelectorAll('.slider__line').length).to.equal(1)
     expect(document.querySelectorAll('.slider__range-line').length).to.equal(1)
     expect(document.querySelectorAll('.slider__thumb-one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__thumb-two').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__wrap-hint--one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__wrap-hint--two').length).to.equal(1)
     expect(document.querySelectorAll('.slider__hint-one').length).to.equal(1)
+    expect(document.querySelectorAll('.slider__thumb-two').length).to.equal(1)
     expect(document.querySelectorAll('.slider__hint-two').length).to.equal(1)
   })
 
   it('создание вертикального слайдера (с одним бегунком)', () => {
     const view = new View(parentElement, true, false)
 
-    expect(document.querySelectorAll('.vert').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__line').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__range-line').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__thumb-one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__wrap-hint--one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__hint-one').length).to.equal(1)
-
+    expect(document.querySelectorAll('.vert .slider__line').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__range-line').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__thumb-one').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__hint-one').length).to.equal(1)
   })
-  
+
   it('создание вертикального слайдера (с двумя бегунками)', () => {
     const view = new View(parentElement, true, true)
 
-    expect(document.querySelectorAll('.vert').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__line').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__range-line').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__thumb-one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__thumb-two').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__wrap-hint--one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__wrap-hint--two').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__hint-one').length).to.equal(1)
-    expect(document.querySelectorAll('.slider__hint-two').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__line').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__range-line').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__thumb-one').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__hint-one').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__thumb-two').length).to.equal(1)
+    expect(document.querySelectorAll('.vert .slider__hint-two').length).to.equal(1)
+  })
+
+  it('проверка метода удаления линии диапозона', () => {
+    const view = new View(parentElement, true, false)
+    view.noneRangeLine();
+
+    expect(document.querySelector('.slider__range-line').style.display).to.equal('none')
+  })
+
+  it('проверка метода удаления линии диапозона', () => {
+    const view = new View(parentElement, true, true)
+    view.noneHints();
+
+    expect(document.querySelector('.slider__hint-one').style.display).to.equal('none')
+    expect(document.querySelector('.slider__hint-two').style.display).to.equal('none')
   })
 });

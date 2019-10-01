@@ -1,29 +1,27 @@
-/*import View from './view/create-slider.js';
-import Controller from './controller/controller.js';
-import Model from './model/model.js';*/
-
 import Facade from './facade/facade.js';
 
 ;(function($) {
   var defaults = {
-    min: 0,
-    max: 100, // если разница с шагом меньше 10 не доходит до конца 666
+    min: 20,
+    max: 100,
     step: 10,
     startValueThumbOne: 50,
     startValueThumbTwo: 60,
     statusRange: true,
-    statusVert: true
+    statusVert: false
   }
 
   var methods = {
-     init : function(parentElem) {
-      const facade = new Facade(parentElem, this.min, this.max, this.step, this.statusRange, 
-      this.statusVert, this.startValueThumbOne, this.startValueThumbTwo);
+     init : function(parentElem, config) {
+      let options = config;
+      const facade = new Facade(parentElem, options);
      },
 
      update: function(config, parentElem) {
       parentElem.innerHTML = '';
       this.init.call(config, parentElem);
+
+      // проверить работает ли ?
      }
   };
 
@@ -33,7 +31,8 @@ import Facade from './facade/facade.js';
     var parentElem = this[0];
 
     if (method === undefined) {
-      methods.init.call(config, parentElem);
+      //methods.init.call(config, parentElem);
+      methods.init(parentElem, config);
     } else {
       methods[method](config, parentElem);
     }
