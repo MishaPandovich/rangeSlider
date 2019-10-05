@@ -16,6 +16,7 @@ export default class ShowValue {
     this._maxShowValue(thumb, sliderCharacteristics);
 
     thumb.children[0].innerText = this.valueResult;
+    this._changePositionHints(thumb);
   }
 
   _minShowValue(thumb, sliderCharacteristics) {
@@ -45,6 +46,33 @@ export default class ShowValue {
 
     if (thumbCoordinateRight === lineCoordinateRight) {
         this.valueResult = sliderCharacteristics.max;
+    }
+  }
+
+  _changePositionHints(thumb) {
+    if (thumb.children[0].innerText <= 10000) {
+       (this.statusVert) ? thumb.children[0].style.left = 24 + 'px':
+                           thumb.children[0].style.left = -7 + 'px';
+    }
+
+    if (thumb.children[0].innerText >= 10000) {
+       (this.statusVert) ? thumb.children[0].style.left = 24 + 'px':
+                           thumb.children[0].style.left = -12 + 'px';
+    }
+
+    if (thumb.children[0].innerText >= 100000) {
+       (this.statusVert) ? thumb.children[0].style.left = 24 + 'px':
+                           thumb.children[0].style.left = -15 + 'px';
+    }
+
+    if (thumb.children[0].innerText >= 1000000) {
+       (this.statusVert) ? thumb.children[0].style.left = 24 + 'px':
+                           thumb.children[0].style.left = -20 + 'px';
+    }
+
+    if (thumb.children[0].innerText >= 10000000) {
+        (this.statusVert) ? thumb.children[0].style.left = 24 + 'px':
+                           thumb.children[0].style.left = -25 + 'px';
     }
   }
 }

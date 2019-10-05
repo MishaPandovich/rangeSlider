@@ -1,48 +1,49 @@
-/*import {expect} from 'chai'
-import Observer from '../src/observer/observer.js'
+import {expect} from 'chai'
+import Model from '../src/model/model.js'
 let assert = require('chai').assert
 
-let clickThumb = function(data) {
-  return data;
-}
+// можно попробовать проверить отрисуется два иили нет слайда
 
-let clickLine = function(data) {
-  return data;
-}
+describe('Проверка входных данных перед отрисовкой', () => {
+  it('pop', function() {
+    let model = new Model()
 
-let mouseThumb = function() {
-  console.log('work');
-}
+    let pop = model._checkMinMax(10, 0);
 
-describe('Тестирование функции наблюдателя', () => {
-  it('cоздаем пустой объект и проверяем его содержимое', () => {
-    let observer = new Observer()
-    assert.isObject(observer.events, 'events it is object')
-    assert.deepEqual(observer.events, {})
-  })
+    expect(pop).to.equal(false)
+  });
+})
 
-  it('добавление функции', () => {
-    let observer = new Observer()
-    observer.add('click', clickThumb)
-    observer.add('click', clickLine)
-    observer.add('mouse', mouseThumb)
 
-    expect(observer.events['click'][0]).to.equal(clickThumb)
-    expect(observer.events['click'][1]).to.equal(clickLine)
-    expect(observer.events['mouse'][0]).to.equal(mouseThumb)
-  })
+// describe('Тестирование функции наблюдателя', () => {
+//   it('cоздаем пустой объект и проверяем его содержимое', () => {
+//     let observer = new Observer()
+//     assert.isObject(observer.events, 'events it is object')
+//     assert.deepEqual(observer.events, {})
+//   })
 
-  it('удаление функции', () => {
-    let observer = new Observer()
+//   it('добавление функции', () => {
+//     let observer = new Observer()
+//     observer.add('click', clickThumb)
+//     observer.add('click', clickLine)
+//     observer.add('mouse', mouseThumb)
 
-    observer.add('click', clickThumb)
-    observer.add('click', clickLine)
-    observer.add('mouse', mouseThumb)
+//     expect(observer.events['click'][0]).to.equal(clickThumb)
+//     expect(observer.events['click'][1]).to.equal(clickLine)
+//     expect(observer.events['mouse'][0]).to.equal(mouseThumb)
+//   })
 
-    observer.remove('click', clickLine)
+//   it('удаление функции', () => {
+//     let observer = new Observer()
 
-    expect(observer.events['click'][0]).to.equal(clickThumb)
-    expect(observer.events['click'][1]).to.equal(undefined)
-    expect(observer.events['mouse'][0]).to.equal(mouseThumb)
-  })
-})*/
+//     observer.add('click', clickThumb)
+//     observer.add('click', clickLine)
+//     observer.add('mouse', mouseThumb)
+
+//     observer.remove('click', clickLine)
+
+//     expect(observer.events['click'][0]).to.equal(clickThumb)
+//     expect(observer.events['click'][1]).to.equal(undefined)
+//     expect(observer.events['mouse'][0]).to.equal(mouseThumb)
+//   })
+// })

@@ -10,7 +10,7 @@ export default class CreateSlider {
 
 		this._initSlider(statusVert, statusRange);
 	}
-
+	
 	noneRangeLine() {
 		this.rangeLine.style.display = "none";
 	}
@@ -33,7 +33,7 @@ export default class CreateSlider {
 		this.line 		 = this._createElement('div', 'line');
 		this.rangeLine = this._createElement('div', 'range-line');
 		this.thumbOne  = this._createElement('div', 'thumb-one');
-		this.hintOne 	 = this._createElement('div', 'hint');
+		this.hintOne 	 = this._createElement('div', 'hint-one');
 
 		this.thumbOne.appendChild(this.hintOne);
 		this.line.appendChild(this.rangeLine);
@@ -42,7 +42,7 @@ export default class CreateSlider {
 
 	_addThumb() {
 		this.thumbTwo  = this._createElement('div', 'thumb-two');
-		this.hintTwo 	 = this._createElement('div', 'hint');
+		this.hintTwo 	 = this._createElement('div', 'hint-two');
 
 		this.thumbTwo.appendChild(this.hintTwo);
 		this.line.appendChild(this.thumbTwo);
