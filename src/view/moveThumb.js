@@ -1,9 +1,12 @@
 export default class MoveThumb {
-  constructor(objectCreateSlider, objectShowValue, statusVert, statusRange) {
+  constructor(objectCreateSlider, objectShowValue, statusVert, statusRange, min, max) {
     this.view = objectCreateSlider;
     this.show = objectShowValue;
     this.statusVert  = statusVert;
     this.statusRange = statusRange;
+
+    this.min = min;
+    this.max = max;
   }
  
   startPosition(thumb, range, step, value) {
@@ -12,11 +15,36 @@ export default class MoveThumb {
     (this.statusVert) ? stepSize = this.view.line.offsetHeight / range :
                         stepSize = this.view.line.offsetWidth / range;
 
-    (this.statusVert) ? thumb.style.top = (stepSize * value) + 'px' :
-                        thumb.style.left = (stepSize * value) + 'px';
+    let minValue = this._calcMinValue(stepSize);
+
+    (this.statusVert) ? thumb.style.top  = ((stepSize * value) - minValue) + 'px' :
+                        thumb.style.left = ((stepSize * value) - minValue) + 'px';
+
+    if (this.min === value) {
+       (this.statusVert) ? thumb.style.top  = 0 + 'px':
+                           thumb.style.left = 0 + 'px';
+    }
+
+    if (this.max === value) {
+      let lineEdge;
+
+      (this.statusVert) ? lineEdge = this.view.line.offsetHeight - this.view.thumbOne.offsetHeight:
+                          lineEdge = this.view.line.offsetWidth - this.view.thumbOne.offsetWidth;
+      (this.statusVert) ? thumb.style.top  = lineEdge + 'px':
+                          thumb.style.left = lineEdge + 'px';
+    }
 
     this.show._startShowValue(thumb, value);
     this._changeRangeLine();
+  }
+
+  _calcMinValue(stepSize) {
+    let minValue;  
+
+    (this.statusVert) ? minValue = (stepSize * this.min) :
+                        minValue = (stepSize * this.min);      
+
+    return minValue;                  
   }
 
   clickThumb(position, obj) {
