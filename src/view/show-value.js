@@ -5,7 +5,11 @@ export default class ShowValue {
   }
 
   _startShowValue(thumb, value) {
-    thumb.children[0].innerText = value;
+    if (thumb.children[0] !== undefined) {
+        thumb.children[0].innerText = value;
+    }
+
+    this._showValueInput(thumb, value);
   }
 
   _showValue(thumb, position, stepSize, sliderCharacteristics) {
@@ -13,11 +17,48 @@ export default class ShowValue {
                         this.valueResult = sliderCharacteristics.min + Math.round((parseInt(thumb.style.left) / stepSize) * sliderCharacteristics.step);
 
     this._minShowValue(thumb, sliderCharacteristics);
-    this._maxShowValue(thumb, sliderCharacteristics);
 
-    thumb.children[0].innerText = this.valueResult;
-    this._changePositionHints(thumb);
+    let valueRest    = this._calcRest(this.valueResult, sliderCharacteristics);
+    this.valueResult = this.valueResult + valueRest;
+
+    this._maxShowValue(thumb, sliderCharacteristics);
+    
+    if (thumb.children[0] !== undefined) { 
+        thumb.children[0].innerText = this.valueResult;
+        this._changePositionHints(thumb);
+    }
+    
+    this._showValueInput(thumb, this.valueResult);
   }
+
+  _calcRest(value, sliderCharacteristics) {
+    if (value - sliderCharacteristics.min === sliderCharacteristics.step) {
+      return 0;
+    } else {
+      let numb = (value - sliderCharacteristics.min) / sliderCharacteristics.step;
+
+      if (Number.isInteger(numb)) {
+        return 0;
+      } else {
+        let range = Math.round(numb) - numb;
+        return Math.round(range * sliderCharacteristics.step);
+      }
+    }
+  }
+
+  _showValueInput(thumb, value) {
+    if (thumb === this.view.thumbOne) {
+      if (document.getElementById("result-thumb-one") !== null) {
+          document.getElementById("result-thumb-one").value = value;
+      }
+    }
+
+    if (thumb === this.view.thumbTwo) {
+      if (document.getElementById("result-thumb-two") !== null) {
+          document.getElementById("result-thumb-two").value = value;
+      }
+    }
+  } // сделать, чтобы можно было устанавливать знаячения через инпуты
 
   _minShowValue(thumb, sliderCharacteristics) {
     let thumbCoordinateLeft;

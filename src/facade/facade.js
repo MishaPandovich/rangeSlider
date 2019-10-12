@@ -8,7 +8,7 @@ export default class Facade {
   constructor(parentElement, obj) {
     let options = obj;
 
-    this.view  = new CreateSlider(parentElement, options.statusVert, options.statusRange);
+    this.view  = new CreateSlider(parentElement, options.statusVert, options.statusRange, options.statusHint, options.statusTracker);
     this.model = new Model(options.min, options.max, options.step, options.statusRange);
     this.show  = new ShowValue(this.view, options.statusVert);
     this.move  = new MoveThumb(this.view, this.show, options.statusVert, options.statusRange, options.min, options.max);

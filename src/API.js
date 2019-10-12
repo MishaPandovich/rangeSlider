@@ -2,13 +2,15 @@ import Facade from './facade/facade.js';
 
 ;(function($) {
   var defaults = {
-    min: 500,
+    min: 300,
     max: 1000,
     step: 100,
     startValueThumbOne: 510,
     startValueThumbTwo: 680,
     statusRange: true,
-    statusVert: false
+    statusVert: false,
+    statusHint: true,
+    statusTracker: true
   }
 
   var methods = {
