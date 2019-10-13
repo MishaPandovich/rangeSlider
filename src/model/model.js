@@ -39,12 +39,4 @@ export default class Model {
 			return false;
 		}
 	}
-
-	_checkStep(startValueOne, startValueTwo) {
-		if (!((startValueTwo - startValueOne) < this.step)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }

@@ -30,15 +30,4 @@ describe('Проверка входных данных перед отрисов
     expect(checkStartValues).to.equal(true)
     expect(falseCheckStartValues).to.equal(false)
   })
-
-
-  it('проверка шага', () => {
-    let model = new Model()
-
-    let checkStep = model._checkStep(0, 100) 
-    let falseCheckStep = model._checkStartValues(1000, 100)
-
-    expect(checkStep).to.equal(true)
-    expect(falseCheckStep).to.equal(false)
-  })
 })
