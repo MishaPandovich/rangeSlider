@@ -1,5 +1,6 @@
 # Range Slider
 jQuery плагин, реализующий слайдер
+[Демо](https://mishapandovich.github.io/demoRangeSlider/index.html)
 
 ## Клонирование репозитория
 ```console
@@ -18,23 +19,23 @@ npm run test
 ## Использование слайдера
 ```console
 1.создайте в файле index.html div с нужным вам id
-	пример:
-	./dist/index.html
-	<div id="slider"></div>
-	и обьявите его в файле index.js следующим образом ./src/indеx.js		
-	$(function() {
-	  $('#slider').slider();
-	});
+пример:
+./dist/index.html
+<div id="slider"></div>
+и обьявите его в файле index.js следующим образом ./src/indеx.js		
+$(function() {
+  $('#slider').slider();
+});
 
 2.указать свои параметры 
-	$(function() {
-	  $('#slider').slider(min : 0, max: 100, step: 10, startValueThumbOne: 40, startValueThumbTwo: 80, statusRange: false,
-	  statusVert: false, statusHint: true, statusTracker: false);
-	});
+$(function() {
+  $('#slider').slider(min : 0, max: 100, step: 10, startValueThumbOne: 40, startValueThumbTwo: 80, statusRange: false,
+  statusVert: false, statusHint: true, statusTracker: false);
+});
 
 3.чтобы, привязать бегунок к инпуту необходимо в файле index.html
-	создать <input type="text" id="result-thumb-one" class="result-thumb result-thumb-one" placeholder="min">
- 	если слайдер диапозонный, то <input type="text" id="result-thumb-two" class="result-thumb result-thumb-two" placeholder="max">
+создать <input type="text" id="result-thumb-one" class="result-thumb result-thumb-one" placeholder="min">
+если слайдер диапозонный, то <input type="text" id="result-thumb-two" class="result-thumb result-thumb-two" placeholder="max">
 ```
 ## API
 ### Характеристики
@@ -185,5 +186,5 @@ npm run test
 
 ### Диаграмма классов
 <div align="center">
-  <img width="1024" height="640" src="assets/Diagramm.png">
+  <img width="900" height="640" src="./asserts/Diagram.png">
 </div>
