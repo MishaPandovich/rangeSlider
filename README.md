@@ -7,41 +7,34 @@ git clone https://github.com/MishaPandovich/rangeSlider.git
 ```
 ## Сборка проекта
 ```console
- *cd rangeSlider
- *npm i
- *npm run build
+- cd rangeSlider
+- npm i
+- npm run build
 ```
 ## Запуск тестов
 ```console
- npm run test
+npm run test
 ```
 ## Использование слайдера
 ```console
-	1. создайте в файле index.html div с нужным вам id
-	  пример:
-	  ./dist/index.html
-		<div id="slider"></div>
-		и обьявите его в файле index.js следующим образом ./src/indеx.js		
-		$(function() {
-		  $('#slider').slider();
-		});
-	2. указать свои параметры 
+1.создайте в файле index.html div с нужным вам id
+	пример:
+	./dist/index.html
+	<div id="slider"></div>
+	и обьявите его в файле index.js следующим образом ./src/indеx.js		
 	$(function() {
-		  $('#slider').slider(
-		  min : 0,
-			max: 100,
-	    step: 10,
-	    startValueThumbOne: 40,
-	    startValueThumbTwo: 80,
-	    statusRange: false,
-	    statusVert: false,
-	    statusHint: true,
-    	statusTracker: false);
-		});
-	3. чтобы, привязать бегунок к инпуту необходимо в файле index.html
-		 создать <input type="text" id="result-thumb-one" class="result-thumb result-thumb-one" placeholder="min">
-		 если слайдер диапозонный, то и
-   	 <input type="text" id="result-thumb-two" class="result-thumb result-thumb-two" placeholder="max">
+	  $('#slider').slider();
+	});
+
+2.указать свои параметры 
+	$(function() {
+	  $('#slider').slider(min : 0, max: 100, step: 10, startValueThumbOne: 40, startValueThumbTwo: 80, statusRange: false,
+	  statusVert: false, statusHint: true, statusTracker: false);
+	});
+
+3.чтобы, привязать бегунок к инпуту необходимо в файле index.html
+	создать <input type="text" id="result-thumb-one" class="result-thumb result-thumb-one" placeholder="min">
+ 	если слайдер диапозонный, то <input type="text" id="result-thumb-two" class="result-thumb result-thumb-two" placeholder="max">
 ```
 ## API
 ### Характеристики
@@ -61,8 +54,7 @@ git clone https://github.com/MishaPandovich/rangeSlider.git
 Приложение построено по принципу MVC(Model-View-Controller), ниже представленно описание частей кода и их взаимодействие между собой:
 
 ### Модель
-Самая независимая часть кода, ничего не знает про вид и контроллер. Содержит основные характеристики слайдера и проверяет входные данные на правильность.
-В коде представлен в виде класса **Model(min, max, step, statusRange, startValueOne, startValueTwo)**.
+Самая независимая часть кода, ничего не знает про вид и контроллер. Содержит основные характеристики слайдера и проверяет входные данные на правильность.В коде представлен в виде класса **Model(min, max, step, statusRange, startValueOne, startValueTwo)**.
 
 Модель содержит следующие методы:
 - **_checkSettings(min, max, startValueOne, startValueTwo)** \
@@ -173,6 +165,9 @@ git clone https://github.com/MishaPandovich/rangeSlider.git
 - **_move(thumb)** \
 находит координаты во время перетаскивания бегунка
 
+- **_up()** \
+отключает перетаскивание бегунка
+
 - **_ondragstart(thumb)** \
 отключает стандартный dragstart
 
@@ -187,3 +182,8 @@ git clone https://github.com/MishaPandovich/rangeSlider.git
 
 - **_initSlider(statusRange)** \
 навешивает обработчики бегункам
+
+### Диаграмма классов
+<div align="center">
+  <img width="1024" height="640" src="assets/Diagramm.png">
+</div>

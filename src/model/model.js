@@ -8,7 +8,7 @@ export default class Model {
 		this.statusRange = statusRange;
 	}
 
-	_checkSettings(min, max, startValueOne, startValueTwo) {
+	checkSettings(min, max, startValueOne, startValueTwo) {
 		if (this.statusRange == false) {
 		  if ((startValueOne >= min) && (startValueOne <= max)) {	
 		  	return true; 
@@ -24,7 +24,7 @@ export default class Model {
 		}
 	}
 
-	_checkMinMax(min, max) {
+	checkMinMax(min, max) {
 		if (min < max) {
 			return true;
 		} else {
@@ -32,7 +32,7 @@ export default class Model {
 		}
 	}
 
-	_checkStartValues(startValueOne, startValueTwo) {
+	checkStartValues(startValueOne, startValueTwo) {
 		if (startValueOne < startValueTwo) {
 			return true;
 		} else {

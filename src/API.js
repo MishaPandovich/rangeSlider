@@ -2,11 +2,11 @@ import Facade from './facade/facade.js';
 
 ;(function($) {
   var defaults = {
-    min: 300,
-    max: 1000,
-    step: 100,
-    startValueThumbOne: 510,
-    startValueThumbTwo: 680,
+    min: 0,
+    max: 100,
+    step: 10,
+    startValueThumbOne: 40,
+    startValueThumbTwo: 80,
     statusRange: true,
     statusVert: false,
     statusHint: true,

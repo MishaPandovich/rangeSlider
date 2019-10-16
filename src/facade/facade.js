@@ -18,12 +18,11 @@ export default class Facade {
   }
 
   _initStart(min, max, step, startValueOne, startValueTwo, statusRange) {
-    let checkSettings    = this.model._checkSettings(min, max, startValueOne, startValueTwo);
-    let checkMinMax      = this.model._checkMinMax(min, max);
-    let checkStartValues = this.model._checkStartValues(startValueOne, startValueTwo);
-    let checkStep        = this.model._checkStep(startValueOne, startValueTwo);
+    let checkSettings    = this.model.checkSettings(min, max, startValueOne, startValueTwo);
+    let checkMinMax      = this.model.checkMinMax(min, max);
+    let checkStartValues = this.model.checkStartValues(startValueOne, startValueTwo);
 
-    if (checkSettings && checkMinMax && checkStartValues && checkStep) {
+    if (checkSettings && checkMinMax && checkStartValues) {
       this._initStartValues(this.view.thumbOne, max, min, step, startValueOne);
       if (statusRange) {
        this._initStartValues(this.view.thumbTwo, max, min, step, startValueTwo);
